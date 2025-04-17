@@ -1251,7 +1251,7 @@ public partial class Signin : System.Web.UI.Page
         }
         //UserIsLoggedIn(false, axUserName.Value, axPassword.Value, hdnProjName.Value, hdnProjLang.Value, staySignIn);
         checkSecurityVal(hdnProjName.Value);
-        checkSecurityVal(hdnProjLang.Value);
+        checkSecurityVal(hdnProjLang.Value);        
         UserIsLoggedIn(false, axUserName.Value, hdnPuser.Value, hdnProjName.Value, hdnProjLang.Value, staySignIn);
     }
 
@@ -1520,7 +1520,7 @@ public partial class Signin : System.Web.UI.Page
         finally
         { }
 
-        if (login.result == string.Empty || login.result.StartsWith(Constants.ERROR) || login.result.Contains(Constants.ERROR) || login.result.EndsWith(Constants.ERRORCLOSE) || login.result.Contains(Constants.ERRORCLOSE))
+        if (login.result == string.Empty || login.result.StartsWith(Constants.ERROR) || login.result.Contains(Constants.ERROR))
         {
             XmlDocument xmldoc = new XmlDocument();
             xmldoc.LoadXml(login.result);
@@ -2530,10 +2530,14 @@ public partial class Signin : System.Web.UI.Page
         string res = string.Empty;
         try
         {
-            if (csrfToken == "" || Util.Util.CheckCrossScriptingInString(csrfToken) || Util.Util.CheckCrossScriptingInString(stsotpauth) || Util.Util.CheckCrossScriptingInString(proj) || Util.Util.CheckCrossScriptingInString(username))
+            if (HttpContext.Current.Session["AntiforgeryToken"] == null || csrfToken != HttpContext.Current.Session["AntiforgeryToken"].ToString())
+            {
+                throw new SecurityException("CSRF Attack Detected!");
+            }
+            if (Util.Util.CheckCrossScriptingInString(stsotpauth) || Util.Util.CheckCrossScriptingInString(proj) || Util.Util.CheckCrossScriptingInString(username))
                 throw new SecurityException("Invalid format.");
 
-            if (csrfToken == "" || Util.Util.ContainsXSS(csrfToken) || Util.Util.ContainsXSS(stsotpauth) || Util.Util.ContainsXSS(proj) || Util.Util.ContainsXSS(username))
+            if (Util.Util.ContainsXSS(stsotpauth) || Util.Util.ContainsXSS(proj) || Util.Util.ContainsXSS(username))
                 throw new SecurityException("Invalid format.");
 
             if (stsotpauth != null && stsotpauth != string.Empty)

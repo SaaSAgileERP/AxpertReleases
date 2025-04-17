@@ -2440,9 +2440,7 @@ function createAutoComplete(autoComStage) {
 
                         //$(autoComStage).parent().removeClass("gopened");
                         gloSrchPageNo = 0;
-                        if (data.d != null && data.d.startsWith("error:"))
-                            showAlertDialog("error", data.d.replace(/^error:/, ''));
-                        else if (data.d.indexOf("*♦*") != -1) {
+                        if (data.d.indexOf("*♦*") != -1) {
                             var srchData = data.d.split("*♦*");
                             gloSrchLimit = srchData[0];
                             console.log("GlobalSearch RowCount-" + srchData[0]);

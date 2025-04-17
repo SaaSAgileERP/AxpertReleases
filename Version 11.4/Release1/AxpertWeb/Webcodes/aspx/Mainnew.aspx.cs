@@ -2211,12 +2211,6 @@ public partial class aspx_Mainnew : System.Web.UI.Page
                     }
                     logObj.CreateLog("Getting from DB-" + keyword + "-with query =" + query, HttpContext.Current.Session.SessionID, "GlobalSearch", "");
                     dsSearchData = obj.GetSearchData(query, limit);
-                    if (HttpContext.Current.Session["AxDirectDBException"] != null)
-                    {
-                        string exMSg = "error:" + HttpContext.Current.Session["AxDirectDBException"].ToString();
-                        HttpContext.Current.Session.Remove("AxDirectDBException");
-                        return exMSg;
-                    }
                     logObj.CreateLog("Getting data from DB-" + st3.Subtract(DateTime.Now).TotalMilliseconds.ToString(), HttpContext.Current.Session.SessionID, "GlobalSearch-Time", "");
 
                     //If view is not present or data is not returned from view- get the data filtered on menu

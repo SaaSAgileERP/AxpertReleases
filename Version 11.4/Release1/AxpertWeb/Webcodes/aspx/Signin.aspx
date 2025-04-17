@@ -50,7 +50,7 @@
     <script src="../ThirdParty/jquery-confirm-master/jquery-confirm.min.js?v=2" type="text/javascript"></script>
     <script src="../Js/noConflict.min.js?v=1" type="text/javascript"></script>
     <script src="../Js/alerts.min.js?v=32" type="text/javascript"></script>
-    <script type="text/javascript" src="../Js/login.js?v=89"></script>
+    <script type="text/javascript" src="../Js/login.min.js?v=89"></script>
     <script type="text/javascript" src="../Js/lang/content-<%=langType%>.js?v=64"></script>
     <script src="../Js/common.min.js?v=154" type="text/javascript"></script>
     <script type="text/javascript">

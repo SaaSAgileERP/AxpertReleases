@@ -1,10 +1,66 @@
-Task ID-012106 -QA(ERP)- Issue Description : The Auto Save Draft functionality is not working as expected in version 11.4. When a user enters data into the Age Form (agfrm) and remains idle, the draft is supposed to be auto-saved based on the configured property value. However, upon revisiting the form, the previously entered values are not restoring.
+-------AxpertWeb11.4 hotfix-040425------------------------------
 
-Task ID-012099 -QA- Issue Description: When we give any invalid credentials that either username or password instead showing invalid credentials its navigating to the blank screen.
+Task ID-012084 -Support(BMRCL)- Below mentioned security vulnerability issues are fixed.
+1. Account Compromise via Parameter Tampering
+2. Insecure Direct Object References (IDOR)
+3. Automated Form Submission
+Note(for Point#1,2 & 3): IIS level setting change required. Detail document has been attached for the same along with screenshots.
+4. Sensitive Information Returned in Response
+   Note: The .vscode folder should be deleted from the project’s web code to prevent unauthorized access to these files.
+5. Brute Force Attack
+  Note:1. The web.config file should be configured to enhance the security of the application login:
+<add key="enableCaptcha" value="true" />
+      2. To lock a user account after multiple failed login attempts, enable this setting in the Password Policy section under Config Studio:
+         "No. of invalid login attempts before account locked."
+6. SSL Weak Ciphers Supported 
+   Note: The following keys in the web.config file should be enabled on an HTTPS site to enhance security
+        1. <httpCookies httpOnlyCookies="true" requireSSL="true" />
+        2. <add name="Strict-Transport-Security" value="max-age=31536000; includeSubDomains; preload" />
+7. Improper Error Handling
+     Note: The following keys in the web.config file should be enabled on an HTTPS site to enhance security
+        1. <httpCookies httpOnlyCookies="true" requireSSL="true" />
+        2. <add name="Strict-Transport-Security" value="max-age=31536000; includeSubDomains; preload" />
+8. Cookie Not Marked As Secure Flag
+      Note: The following keys in the web.config file should be enabled on an HTTPS site to enhance security
+        1. <httpCookies httpOnlyCookies="true" requireSSL="true" />
+        2. <add name="Strict-Transport-Security" value="max-age=31536000; includeSubDomains; preload" />
 
-Task ID-012098 -QA- Issue Description: When we enter the valid OTP code for the the user its not signing in, instead the screen remains same. Also if we enter any invalid OTP code also the screen remains same
+Task ID-012089 -Support(DE and DPC)-DE and DPC projects (Jaipur), the security audit findings are received to check on the product level. 
+Note: Below mentioned points are fixed, those are mentioned in Security audit findings. 
+DE Project:
+1. Unencrypted Login Request: Sensitive Data Exposure: Login Credentials in Plain Text
+2. API Mass Assignment : API Mass Assignment exploitation may leads to privilege escalation, data tampering, bypass of security mechanisms
+3. Cookie with Insecure or Improper or Missing SameSite attribute   
+4. Cross-site request forgery 
+5. Vulnerable Component 
+DPC Project:
+1. Reflected Cross Site Scripting  
+2. Unencrypted Login Request  
+3. Cross-site request forgery 
+4. Weak Signature in JWT  
+5. Body Parameters Accepted in Query 
+6. Cookie with Insecure or Improper or Missing SameSite attribute   
+7. eShoplifting  
+8. Missing or Insecure "Script-Src" policy in "Content-Security-Policy" header
+9. Missing or Insecure "Object-Src" policy in "Content-Security-Policy" header
+10. Missing "Content-Security-Policy" header 
+
+Task ID-012096 -QA(nuwab)-Issue Description: Scenario 1: Global Search is not working when the user logs in with the Arabic language.
+Scenario 2: Global Search is not working when the user logs in with English, switches the language to Arabic, and then performs a search
+
+Task ID-012093 -QA- Issue Description : In Iview--> Except Print button, the following buttons are not visible under the Utility PDF, Excel, HTML, JSON, Copy, and Word.
+
+Task ID-012097 -QA-Issue Description: Unable to log in to the 11.4 QA URL with the upgraded schema from 10.9 to 11.4,redirecting to session expired screen. Showing exception stating that the relation "axhomeconfig" does not exist in the GetMultiMenu trace file.
 
 Below issues are fixed those are mentioned in Product release group by QA team:
-1. Default buttons are overlapping with screen name.
-2. SSO configuration not working after move to 'config' page
-3. DB Exceptions should show in client side as well
+1. The Details column values are getting meshed instead it should visible order wise.
+2. The Hyperlinks are not aligned properly.
+3. The Add child column is not aligned properly.
+4. When expanding the card the column values are displayed out of the frame. 
+5. Params close icon is displayed multiple.
+6. Default buttons are overlapping with screen name.
+7. Edit Prior Forms are not working in Active list. 
+8. Import not working when Redis password is configured. 
+9. Listing page view filters (transid_filter) and home page is not refreshed properly after global params save/update. 
+10. Cache is not getting cleared for data listing metadata, so data is not getting listed after clearing cache from 'Config studio - In memory DB' 
+11. Global Import – Randomly encountering "AxpEncryptData.dll not found" error.
